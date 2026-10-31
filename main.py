@@ -172,10 +172,13 @@ def show_books_by_category(books):
             print(book)
 
 
-def search_books():
-    searched_book = input(print("Search books here: "))
-    if searched_book != books_db:
-        print("Try again.")
+def search_books(books):
+    searched_book = input("Search books here: ").lower()
+
+    for book in books:
+        name_of_book = book["name"].lower()
+        if searched_book in name_of_book:
+            print(book)
 
 
 def start_library(books):
@@ -186,7 +189,7 @@ def start_library(books):
         elif user_choice == "2":
             show_books_by_category(books)
         elif user_choice == "3":
-            search_books
+            search_books(books)
         elif user_choice == "999":
             print("It was nice knowing you. Bye!")
             return
