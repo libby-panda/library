@@ -20,7 +20,7 @@ books_db = [
     {
         "name": "The Hobbit, or There and Back Again",
         "author": "J.R.R. Tolkien",
-        "year": "2002",
+        "year": "1937",
         "genre": "Fantasy"
     },
     {
@@ -134,6 +134,21 @@ books_db = [
 ]
 
 
+def book_chart(books):
+    header = """
+             .________________________________________________________________________________________.
+             |    name            |     genre          |     author         |     year published      |
+             |____________________|____________________|____________________|_________________________|"""
+
+    footer = """             |____________________|____________________|____________________|_________________________|
+             """
+
+    print(header)
+    for book in books:
+        print(f"             | {book['name'][:18].ljust(18)} | {book['genre'][:18].ljust(18)} | {book['author'][:18].ljust(18)} | {book['year'].ljust(24)}|")
+    print(footer)
+
+
 def show_menu():
     print("""
                
@@ -148,9 +163,7 @@ def show_menu():
 
 
 def show_all_books(books):
-
-    for book in books:
-        print(book)
+    book_chart(books)
     print(f"""
     Total:
     {len(books)} books""")
@@ -167,18 +180,21 @@ def show_books_by_category(books):
             print(f"{i}. {genre}")
     genre_chosen_id = input("Choose a genre.")
     genre_chosen = categories[int(genre_chosen_id) - 1]
+    books_to_show = []
     for book in books:
         if book["genre"] == genre_chosen:
-            print(book)
+            books_to_show.append(book)
+    book_chart(books_to_show)
 
 
 def search_books(books):
     searched_book = input("Search books here: ").lower()
-
+    books_to_show = []
     for book in books:
         name_of_book = book["name"].lower()
         if searched_book in name_of_book:
-            print(book)
+            books_to_show.append(book)
+    book_chart(books_to_show)
 
 
 def start_library(books):
